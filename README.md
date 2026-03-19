@@ -41,9 +41,30 @@ o	Power (VCC & GND) and appropriate resistors.
 3.	Run the simulation and observe the digits 0 to 9 appearing sequentially.
 
 ## Program:
-
-
+```
+ORG 0000
+L:MOV DPTR,#0100H
+MOV R1,#0AH
+BACK: CLR A
+MOVC A,@A+DPTR
+MOV P2,A
+ACALL D
+INC DPTR
+DJNZ R1,BACK
+SJMP L
+D:MOV R5,#05
+B2:MOV R3,#255 
+B1:MOV R4,#255
+AG:DJNZ R4,AG
+DJNZ R3,B1
+DJNZ R5,B2
+RET
+ORG 0100H
+DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
+END
+```
 ## Output:
+<img width="1379" height="745" alt="image" src="https://github.com/user-attachments/assets/0d5f208d-bda4-431c-9438-cf6634ee44f2" />
 
 
 ## Result:
